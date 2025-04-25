@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Team Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            display: flex;sa
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            color: #007bff;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            text-align: left;
+        }
+        input {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .hidden {
+            display: none;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .signup-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .signup-link a {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Login Form -->
+    <div class="container" id="login-container">
+        <h1>Service Team Login</h1>
+        <form id="login-form">
+            <label for="employeeId">Employee ID:</label>
+            <input type="text" id="employeeId" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            
+            <button type="submit">Login</button>
+        </form>
+        <a href="index.html">Back to Home</a>
+        <div class="signup-link">
+            <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+        </div>
+    </div>
+
+    <!-- "Sign Up" Link -->
+    
+
+    <!-- OTP Verification -->
+    <div class="container hidden" id="otp-container">
+        <h1>Enter OTP</h1>
+        <form id="otp-form">
+            <label for="otp">OTP (4 digits):</label>
+            <input type="text" id="otp" maxlength="4" pattern="\d{4}" required>
+            <button type="submit">Verify OTP</button>
+            <p id="otp-error" class="error hidden">Invalid OTP. Please try again.</p>
+        </form>
+    </div>
+
+    <!-- Success Message -->
+    <div class="container hidden" id="success-container">
+        <h1>Your service has successfully completed</h1>
+        <a href="index.html">Back to Home</a>
+    </div>
+
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            document.getElementById("login-container").classList.add("hidden");
+            document.getElementById("otp-container").classList.remove("hidden");
+        });
+
+        document.getElementById("otp-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const enteredOtp = document.getElementById("otp").value;
+            const storedOtp = localStorage.getItem("otp");
+            const otpExpiry = localStorage.getItem("otpExpiry");
+            const currentTime = Date.now();
+            
+            if (enteredOtp === storedOtp && otpExpiry && currentTime < otpExpiry) {
+                document.getElementById("otp-container").classList.add("hidden");
+                document.getElementById("success-container").classList.remove("hidden");
+            } else {
+                document.getElementById("otp-error").classList.remove("hidden");
+            }
+        });
+    </script>
+</body>
+</html>

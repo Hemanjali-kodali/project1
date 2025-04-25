@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a New User Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            color: #007bff;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Create your employee Account Here</h1>
+        <form id="signup-form">
+            <label for="newTeamId">Employee ID (6 digits):</label>
+            <input type="number" id="newTeamId" readonly required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+
+            <button type="submit">Create Account</button>
+        </form>
+
+        
+    </div>
+
+    <script>
+        // Function to generate a 6-digit random Team ID
+        function generateTeamId() {
+            let teamId = '';
+            for (let i = 0; i < 6; i++) {
+                teamId += Math.floor(Math.random() * 10);
+            }
+            document.getElementById('newTeamId').value = teamId;
+        }
+
+        // Generate Team ID when the page loads
+        window.onload = generateTeamId;
+
+        document.getElementById("signup-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const teamId = document.getElementById("newTeamId").value;
+            const password = document.getElementById("password").value;
+
+            // Here, you would send the data to a server to create the account
+            // For this example, we are just showing an alert
+            alert(Account created successfully!\nTeam ID: ${teamId}\nPassword: ${password});
+
+            // Redirect the user to the login page after account creation
+            window.location.href = "service_team_login.html";
+        });
+    </script>
+
+</body>
+</html>
