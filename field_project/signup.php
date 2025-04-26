@@ -13,8 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $teamId, $password);
 
-    if ($stmt->execute()) {
-        echo "<script>alert('Account created successfully!'); window.location.href='service_team_login.html';</script>";
+   if ($stmt->execute()) {
+        echo "<script>
+                alert('Account created successfully!');
+                window.location.href = 'service_team_login.php';
+              </script>";
     } else {
         echo "Error: " . $stmt->error;
     }
